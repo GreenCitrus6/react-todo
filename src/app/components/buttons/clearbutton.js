@@ -1,7 +1,7 @@
 
-export default function ClearButton() {
+export default function ClearButton({taskList}) {
     function handleClearComplete() {
-        console.log('test clear button');
+        console.log(taskList);
     }
     
     return(
