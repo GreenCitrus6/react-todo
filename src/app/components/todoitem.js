@@ -1,7 +1,22 @@
+import { useState } from 'react';
+import DeleteItem from './buttons/deleteitem.js'
 
-export default function ToDoItem({ toDoInnerText, completion}) {
+export default function ToDoItem({ toDoInnerText, completion, toggleCompletion, taskList, itemKey}) {
+    let [completionStatus, setCompletionStatus] = useState(false);
+    function handleToggleComplete(completion) {
+        if (completionStatus) {
+            setCompletionStatus(false);
+        } else {
+            setCompletionStatus(true);
+        }
+        
+        taskList.find(item => item.key === itemKey).completed = !taskList.find(item => item.key === itemKey).completed;
+    }
+
     
     return(
-        <li className="m-2"><input type="checkbox" className="h-4 w-4" /> <span className="text-gray-700 text-lg align-middle">{toDoInnerText}</span></li>
+        <li className="m-2"><input type="checkbox" className="h-4 w-4" onClick={(completion) => {
+            handleToggleComplete(completion);
+        }} /> <span className={completionStatus ? 'text-gray-400 text-lg align-middle line-through' : 'text-gray-700 text-lg align-middle'}>{toDoInnerText}</span></li>
     );
 }

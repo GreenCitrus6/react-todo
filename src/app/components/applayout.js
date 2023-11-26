@@ -8,7 +8,6 @@ import ToDoItem from "./todoitem";
 
 export default function AppLayout(props) {
     //fetching the current user input in the text box
-    
     const [task, setTask] = useState('');
 
     const parseInputField = (task) => {
@@ -26,6 +25,10 @@ export default function AppLayout(props) {
         );
         console.log(taskList);
     }
+    //change completion status of a task on checkbox tick
+    const toggleCompletion = (taskList) => {
+        
+    }
 
 
     return(
@@ -33,9 +36,8 @@ export default function AppLayout(props) {
           <div className="h-5/6">
             <h1 className="font-bold text-3xl text-gray-600">To Do List:</h1>
             <ul id="todoUl" className="mt-3 h-[90%] overflow-y-scroll">
-                {/* ADD TODO ITEMS HERE */}
                 {
-                    taskList.map((item) => <ToDoItem key={item.key} toDoInnerText={item.item} completion={item.completed} />)
+                    taskList.map((item) => <ToDoItem key={item.key} itemKey={item.key} toDoInnerText={item.item} completion={item.completed} taskList={taskList} />)
                 }
             </ul>
             </div>
