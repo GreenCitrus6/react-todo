@@ -2,7 +2,7 @@
 import InputField from "./inputfield";
 import AddButton from "./buttons/addbutton";
 import ClearButton from "./buttons/clearbutton";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ToDoItem from "./todoitem";
 
@@ -33,8 +33,18 @@ export default function AppLayout(props) {
                 { key: uuidv4(), item: task, completed: false }
             ]
         );
-        console.log(taskList);
     }
+    //load locally stored task list upon initialization
+    useEffect(() => {
+        const retrievedTaskList = JSON.parse(localStorage.getItem('localTaskList'));
+        if (retrievedTaskList) {
+            setTaskList(retrievedTaskList);
+        }
+    }, []);
+    //save task list to local storage
+    useEffect(() => {
+        if (taskList.length > 0) {localStorage.setItem('localTaskList', JSON.stringify(taskList))}
+    }, [taskList]);
     //remove tasks that have been marked as complete
     const clearComplete = (taskList) => {
         let clearedTaskList = [];
