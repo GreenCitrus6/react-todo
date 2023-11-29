@@ -2,14 +2,19 @@
 import InputField from "./inputfield";
 import AddButton from "./buttons/addbutton";
 import ClearButton from "./buttons/clearbutton";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ToDoItem from "./todoitem";
 
 {/* DEVELOPMENT TO DO LIST
     [x]add functionality to clear all tasks marked as complete
     [x]add functionality to delete a single item from the task list
-    [ ]add local storage feature so that tasks persist when the user refreshes the page
+    [x]add local storage feature so that tasks persist when the user refreshes the page
+    [ ]add enter key functionality for input field
+    [ ]fix bugs
+        [x]when the last item is removed by either method, it is still stored in local storage and appears upon reload
+        [ ]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
+        [ ]
     [ ]refactor components to be more neat
         [ ]remove unused code
         [ ]change variable names to be more understandable
@@ -42,8 +47,18 @@ export default function AppLayout(props) {
         }
     }, []);
     //save task list to local storage
+    // useEffect(() => {
+    //     if (taskList.length > 0) {localStorage.setItem('localTaskList', JSON.stringify(taskList))}
+    //     // localStorage.setItem('localTaskList', JSON.stringify(taskList))
+    // }, [taskList]);
+    //prevent writing to the task list on initial load
+    const isMounted = useRef(false);
     useEffect(() => {
-        if (taskList.length > 0) {localStorage.setItem('localTaskList', JSON.stringify(taskList))}
+        if(isMounted.current) {
+            localStorage.setItem('localTaskList', JSON.stringify(taskList));
+        } else {
+            isMounted.current = true;
+        }
     }, [taskList]);
     //remove tasks that have been marked as complete
     const clearComplete = (taskList) => {
