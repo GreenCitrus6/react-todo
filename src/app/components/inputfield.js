@@ -5,7 +5,12 @@ export default function InputField({ parseInputField }) {
             input = document.getElementById("taskInputField").value;
             parseInputField(input); 
     }
+
     return(
-        <input type="text" id="taskInputField" className="border-gray-500 border-2 rounded-xl h-9 w-full p-2" onKeyUp={ handleFetchUserInput } />
+        <input type="text" id="taskInputField" className="border-gray-500 border-2 rounded-xl h-9 w-full p-2" onKeyUp={ handleFetchUserInput } onKeyDown={ e => {
+            if (e.key === 'Enter') {
+                document.getElementById('addButtonHtml').click();
+            }
+        } }/>
     );
 }

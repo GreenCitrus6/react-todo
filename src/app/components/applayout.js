@@ -46,12 +46,7 @@ export default function AppLayout(props) {
             setTaskList(retrievedTaskList);
         }
     }, []);
-    //save task list to local storage
-    // useEffect(() => {
-    //     if (taskList.length > 0) {localStorage.setItem('localTaskList', JSON.stringify(taskList))}
-    //     // localStorage.setItem('localTaskList', JSON.stringify(taskList))
-    // }, [taskList]);
-    //prevent writing to the task list on initial load
+    //prevent writing to the task list on initial load, otherwise save tasklist to local storage
     const isMounted = useRef(false);
     useEffect(() => {
         if(isMounted.current) {
