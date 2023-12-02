@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DeleteItem from './buttons/deleteitem.js'
 
-export default function ToDoItem({ toDoInnerText, completion, toggleCompletion, taskList, itemKey, deleteTask}) {
+export default function ToDoItem({ toDoInnerText, taskList, itemKey, deleteTask}) {
     let [completionStatus, setCompletionStatus] = useState(false);
     function handleToggleComplete(completion) {
         if (completionStatus) {

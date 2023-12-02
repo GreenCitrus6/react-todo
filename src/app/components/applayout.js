@@ -10,10 +10,10 @@ import ToDoItem from "./todoitem";
     [x]add functionality to clear all tasks marked as complete
     [x]add functionality to delete a single item from the task list
     [x]add local storage feature so that tasks persist when the user refreshes the page
-    [ ]add enter key functionality for input field
+    [x]add enter key functionality for input field
     [ ]fix bugs
         [x]when the last item is removed by either method, it is still stored in local storage and appears upon reload
-        [ ]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
+        [x]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
         [ ]
     [ ]refactor components to be more neat
         [ ]remove unused code
@@ -22,12 +22,10 @@ import ToDoItem from "./todoitem";
 */}
 
 export default function AppLayout(props) {
-    //fetching the current user input in the text box
+    //get the current user input in the text box
     const [task, setTask] = useState('');
-
     const parseInputField = (task) => {
         setTask(task);
-        // console.log(task);
     }
     //adding that task to the task list array upon pressing the add button
     const [taskList, setTaskList] = useState([]);
