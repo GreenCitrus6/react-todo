@@ -1,4 +1,4 @@
-##React To do list
+## React To do list
 
 This is a simple to do list app made with React, Next.js, and TailwindCSS. 
 You can add tasks, remove them individually, or remove all tasks marked as complete at once.
