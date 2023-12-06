@@ -2,7 +2,6 @@
 export default function ClearButton({taskList, clearComplete}) {
     function handleClearComplete(taskList) {
         clearComplete(taskList);
-        // console.log(taskList);
     }
     
     return(

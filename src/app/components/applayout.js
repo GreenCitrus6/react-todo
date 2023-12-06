@@ -22,12 +22,12 @@ import ToDoItem from "./todoitem";
 */}
 
 export default function AppLayout(props) {
-    //get the current user input in the text box
+    //Get the current user input in InputField
     const [task, setTask] = useState('');
     const parseInputField = (task) => {
         setTask(task);
     }
-    //adding that task to the task list array upon pressing the add button
+    //Adding that task to the task list array upon pressing the add button
     const [taskList, setTaskList] = useState([]);
     const addTask = (task, taskList) => {
         setTaskList(
@@ -37,14 +37,14 @@ export default function AppLayout(props) {
             ]
         );
     }
-    //load locally stored task list upon initialization
+    //Load locally stored task list upon initialization
     useEffect(() => {
         const retrievedTaskList = JSON.parse(localStorage.getItem('localTaskList'));
         if (retrievedTaskList) {
             setTaskList(retrievedTaskList);
         }
     }, []);
-    //prevent writing to the task list on initial load, otherwise save tasklist to local storage
+    //Prevent writing to the task list on initial load, otherwise save tasklist to local storage
     const isMounted = useRef(false);
     useEffect(() => {
         if(isMounted.current) {
@@ -53,10 +53,9 @@ export default function AppLayout(props) {
             isMounted.current = true;
         }
     }, [taskList]);
-    //remove tasks that have been marked as complete
+    //Remove tasks that have been marked as complete, passed to ClearButton
     const clearComplete = (taskList) => {
         let clearedTaskList = [];
-        
 
         taskList.map((item) => {
             if (!item.completed) {
@@ -65,10 +64,8 @@ export default function AppLayout(props) {
         })
 
         setTaskList(clearedTaskList);
-
-        console.log(taskList);
     }
-    //remove a single task
+    //Remove a single task, passed to DeleteItem
     const deleteTask = (taskList, itemKey) => {
         let clearedTaskList = [];        
 
@@ -79,16 +76,14 @@ export default function AppLayout(props) {
         })
 
         setTaskList(clearedTaskList);
-
-        console.log(taskList);
     }
 
     return(
-        <main className="border-4 border-gray-600 flex flex-col justify-between rounded-3xl w-5/6 p-5 h-4/5 max-w-6xl">
+        <main className="border-4 border-gray-600 flex flex-col justify-between rounded-3xl w-5/6 max-w-6xl p-5 h-4/5">
           <div className="h-5/6">
             <h1 className="font-bold text-3xl text-gray-600">To Do List:</h1>
             <ul id="todoUl" className="mt-3 h-[90%] overflow-y-scroll">
-                {
+                {   /* Render a <ToDoItem /> for every item in the taskList array */
                     taskList.map((item) => <ToDoItem key={item.key} itemKey={item.key} toDoInnerText={item.item} completion={item.completed} taskList={taskList} deleteTask={deleteTask} />)
                 }
             </ul>
@@ -98,13 +93,13 @@ export default function AppLayout(props) {
     );
 }
 
-function BottomContainer({ parseInputField, addTask, task, taskList, refreshUI, clearComplete }) {
+function BottomContainer({ parseInputField, addTask, task, taskList, clearComplete }) {
     return (
         <div className="block sm:flex sm:items-center">
           <InputField parseInputField={parseInputField}/>
           <div className="flex flex-row justify-between items-center sm:pl-2">
-            <AddButton addTask={addTask} task={task} taskList={taskList} refreshUI={refreshUI} />
-            <ClearButton taskList={taskList} refreshUI={refreshUI} clearComplete={clearComplete} />
+            <AddButton addTask={addTask} task={task} taskList={taskList} />
+            <ClearButton taskList={taskList} clearComplete={clearComplete} />
           </div>
         </div>
     );
