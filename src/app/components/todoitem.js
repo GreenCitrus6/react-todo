@@ -2,6 +2,7 @@ import { useState } from 'react';
 import DeleteItem from './buttons/deleteitem.js'
 
 export const ItemCheckbox = ( {handleToggleComplete, completionStatus} ) => {
+    //The state used by the checkbox is tied to the completionStatus set in the parent component
     const [isChecked, setIsChecked] = (completionStatus ? useState(true) : useState(false));
 
     function  checkHandler(){
@@ -16,6 +17,7 @@ export const ItemCheckbox = ( {handleToggleComplete, completionStatus} ) => {
 }
 
 export default function ToDoItem({ toDoInnerText, taskList, setTaskList, itemKey, deleteTask }) {
+    //The state of completionStatus is tied to the completed value in the task object in the taskList array
     let [completionStatus, setCompletionStatus] = (taskList.find(item => item.key === itemKey).completed ? useState(true) : useState(false));
     const handleToggleComplete = () => {
         let tempTaskList = taskList;
