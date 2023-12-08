@@ -14,20 +14,20 @@ import ToDoItem from "./todoitem";
     [ ]fix bugs
         [x]when the last item is removed by either method, it is still stored in local storage and appears upon reload
         [x]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
-        [ ]
+        [x]when a task is marked complete, but the page is refreshed, the task list persists but the completion status is lost
     [ ]refactor components to be more neat
         [x]remove unused code
         [ ]change variable names to be more understandable
         [x]comment code with explanations
 */}
 
-export default function AppLayout(props) {
+export default function AppLayout() {
     //Get the current user input in InputField
     const [currentTask, setCurrentTask] = useState('');
     const parseInputField = (currentTask) => {
         setCurrentTask(currentTask);
     }
-    //Adding that task to the task list array upon pressing the add button
+    //Adding the current user input to the task list array upon pressing the add button
     const [taskList, setTaskList] = useState([]);
     const addTask = (currentTask, taskList) => {
         setTaskList(
@@ -53,7 +53,7 @@ export default function AppLayout(props) {
             isMounted.current = true;
         }
     }, [taskList]);
-    //Replace taskList with a new array that has no tasks marked as complete. passed to ClearButton
+    //Replace taskList with a new array that has no tasks marked as complete. Effectively removes tasks marked as complete. Passed to ClearButton
     const clearComplete = (taskList) => {
         let clearedTaskList = [];
 
@@ -84,7 +84,7 @@ export default function AppLayout(props) {
             <h1 className="font-bold text-3xl text-gray-600">To Do List:</h1>
             <ul id="todoUl" className="mt-3 h-[90%] overflow-y-scroll">
                 {   /* Render a <ToDoItem /> for every item in the taskList array */
-                    taskList.map((item) => <ToDoItem key={item.key} itemKey={item.key} toDoInnerText={item.item} completion={item.completed} taskList={taskList} deleteTask={deleteTask} />)
+                    taskList.map((item) => <ToDoItem key={item.key} itemKey={item.key} toDoInnerText={item.item} completion={item.completed} taskList={taskList} setTaskList={setTaskList} deleteTask={deleteTask} />)
                 }
             </ul>
             </div>
