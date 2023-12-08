@@ -1,5 +1,7 @@
 ## React To do list
 
+![image](https://github.com/GreenCitrus6/react-todo/assets/145170576/2a0c6378-43e2-4159-b285-2a1718937a59)
+
 This is a simple to do list app made with React, Next.js, and TailwindCSS. 
 You can add tasks, remove them individually, or remove all tasks marked as complete at once.
 
