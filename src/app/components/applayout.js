@@ -11,7 +11,8 @@ import ToDoItem from "./todoitem";
     [x]add functionality to delete a single item from the task list
     [x]add local storage feature so that tasks persist when the user refreshes the page
     [x]add enter key functionality for input field
-    [ ]fix bugs
+    [ ]remove whitespace from front and end of a string upon adding to todo list, do not accept adding strings that are only whitespace
+    [x]fix bugs
         [x]when the last item is removed by either method, it is still stored in local storage and appears upon reload
         [x]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
         [x]when a task is marked complete, but the page is refreshed, the task list persists but the completion status is lost
@@ -79,7 +80,7 @@ export default function AppLayout() {
     }
 
     return(
-        <main className="border-4 border-gray-600 flex flex-col justify-between rounded-3xl w-5/6 max-w-6xl p-5 h-4/5">
+        <main className="border-4 border-gray-600 flex flex-col justify-between rounded-3xl w-5/6 max-w-6xl p-5 h-4/5 overflow-hidden">
           <div className="h-5/6">
             <h1 className="font-bold text-3xl text-gray-600">To Do List:</h1>
             <ul id="todoUl" className="mt-3 h-[90%] overflow-y-scroll">
