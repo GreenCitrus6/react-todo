@@ -1,9 +1,9 @@
 
 
-export default function AddButton({addTask, task, taskList}) {
+export default function AddButton({addTask, currentTask, taskList}) {
     function handleAddBtnPress(){
-        if (task) {
-            addTask(task, taskList);
+        if (currentTask) {
+            addTask(currentTask, taskList);
             document.getElementById('taskInputField').value = '';
         } else {
             return;

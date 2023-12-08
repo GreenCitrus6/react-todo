@@ -16,24 +16,24 @@ import ToDoItem from "./todoitem";
         [x]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
         [ ]
     [ ]refactor components to be more neat
-        [ ]remove unused code
+        [x]remove unused code
         [ ]change variable names to be more understandable
-        [ ]comment code with explanations
+        [x]comment code with explanations
 */}
 
 export default function AppLayout(props) {
     //Get the current user input in InputField
-    const [task, setTask] = useState('');
-    const parseInputField = (task) => {
-        setTask(task);
+    const [currentTask, setCurrentTask] = useState('');
+    const parseInputField = (currentTask) => {
+        setCurrentTask(currentTask);
     }
     //Adding that task to the task list array upon pressing the add button
     const [taskList, setTaskList] = useState([]);
-    const addTask = (task, taskList) => {
+    const addTask = (currentTask, taskList) => {
         setTaskList(
             [
                 ...taskList,
-                { key: uuidv4(), item: task, completed: false }
+                { key: uuidv4(), item: currentTask, completed: false }
             ]
         );
     }
@@ -53,7 +53,7 @@ export default function AppLayout(props) {
             isMounted.current = true;
         }
     }, [taskList]);
-    //Remove tasks that have been marked as complete, passed to ClearButton
+    //Replace taskList with a new array that has no tasks marked as complete. passed to ClearButton
     const clearComplete = (taskList) => {
         let clearedTaskList = [];
 
@@ -88,17 +88,17 @@ export default function AppLayout(props) {
                 }
             </ul>
             </div>
-            <BottomContainer parseInputField={parseInputField} addTask={addTask} task={task} taskList={taskList} clearComplete={clearComplete} />
+            <BottomContainer parseInputField={parseInputField} addTask={addTask} currentTask={currentTask} taskList={taskList} clearComplete={clearComplete} />
         </main>
     );
 }
 
-function BottomContainer({ parseInputField, addTask, task, taskList, clearComplete }) {
+function BottomContainer({ parseInputField, addTask, currentTask, taskList, clearComplete }) {
     return (
         <div className="block sm:flex sm:items-center">
           <InputField parseInputField={parseInputField}/>
           <div className="flex flex-row justify-between items-center sm:pl-2">
-            <AddButton addTask={addTask} task={task} taskList={taskList} />
+            <AddButton addTask={addTask} currentTask={currentTask} taskList={taskList} />
             <ClearButton taskList={taskList} clearComplete={clearComplete} />
           </div>
         </div>
