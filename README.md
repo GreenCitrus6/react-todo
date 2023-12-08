@@ -5,6 +5,8 @@
 This is a simple to do list app made with React, Next.js, and TailwindCSS. 
 You can add tasks, remove them individually, or remove all tasks marked as complete at once.
 
+You can try this app at https://react-todo-five-brown.vercel.app/
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
