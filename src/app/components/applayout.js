@@ -6,22 +6,6 @@ import { useEffect, useState, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ToDoItem from "./todoitem";
 
-{/* DEVELOPMENT TO DO LIST
-    [x]add functionality to clear all tasks marked as complete
-    [x]add functionality to delete a single item from the task list
-    [x]add local storage feature so that tasks persist when the user refreshes the page
-    [x]add enter key functionality for input field
-    [ ]remove whitespace from front and end of a string upon adding to todo list, do not accept adding strings that are only whitespace
-    [x]fix bugs
-        [x]when the last item is removed by either method, it is still stored in local storage and appears upon reload
-        [x]when a task is added and the input field is made blank, you can keep adding it by pressing the add button
-        [x]when a task is marked complete, but the page is refreshed, the task list persists but the completion status is lost
-    [ ]refactor components to be more neat
-        [x]remove unused code
-        [ ]change variable names to be more understandable
-        [x]comment code with explanations
-*/}
-
 export default function AppLayout() {
     //Get the current user input in InputField
     const [currentTask, setCurrentTask] = useState('');
