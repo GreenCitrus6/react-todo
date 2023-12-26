@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import AppContainer from './components/appcontainer';
 import AppLayout from './components/applayout';
 
